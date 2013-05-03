@@ -1,0 +1,39 @@
+%{
+#include <iostream>
+#include <string>
+#include <map>
+using namespace std;
+
+extern FILE *yyin;
+
+//-- Lexer prototype required by bison, aka getNextToken()
+int yylex(); 
+int yyerror(const char *p) { cerr << "Error!" << endl; }
+%}
+
+%union { 
+  char sym;
+  char* val; 
+};
+%token	<val> RELATIVELAYOUT TEXTVIEW BUTTON XMLNS ANDROID TOOLS LAYOUTWIDTH LAYOUTHEIGHT CONTEXT ID LAYOUTALIGNPARENTRIGHT LAYOUTALIGNPARENTLEFT LAYOUTALIGNPARENTTOP LAYOUTMARGINRIGHT LAYOUTMARGINTOP TEXT LAYOUTBELOW LAYOUTMARGINLEFT ONCLICK LITERAL
+%token	<sym> LANGLE RANGLE SLASH COLON EQUALS QUOTE NEWLINE
+
+%%
+
+start: LANGLE RELATIVELAYOUT continue RANGLE NEWLINE	{cout << "YES!";}
+continue:	|
+			NEWLINE continue |
+			options1 COLON options2 EQUALS LITERAL continue
+options1:	XMLNS | ANDROID | TOOLS
+options2:	ANDROID | TOOLS | LAYOUTHEIGHT | LAYOUTWIDTH | CONTEXT
+
+%%
+
+int main(int argc, char **argv){
+		++argv; --argc;
+		if(argc > 0)
+			yyin = fopen(argv[0], "r");
+		else
+			yyin = stdin;
+		yyparse();
+}
