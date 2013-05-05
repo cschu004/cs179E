@@ -1,0 +1,56 @@
+%{
+int import_or_package = 1;
+%}
+
+%%
+package  	printf( "PACKAGE\n" );
+import		printf( "IMPORT\n" );
+public		printf( "PUBLIC\n" );
+class		printf( "CLASS\n" );
+extends		printf( "EXTENDS\n" );
+protected	printf( "PROTECTED\n" );
+void		printf( "VOID\n" );
+boolean		printf( "BOOLEAN\n" );
+true		printf( "TRUE\n" );
+false		printf( "FALSE\n" );
+return		printf( "RETURN\n" );
+TextView	printf( "TEXTVIEW\n" );
+Menu		printf( "MENU\n" );
+Bundle		printf( "BUNDLE\n" );
+[a-zA-Z]+"."[a-zA-Z"(""." | ")"]*")"	printf("FUNCTION_CALL: %s\n" , yytext );
+[a-zA-Z]+"."[a-zA-Z"."|"_"]*	{
+		printf( "ACCESS_VALUE: %s\n" , yytext );
+}
+[a-zA-Z]+"()."[a-zA-Z]*	printf( "OTHERS: %s\n" ,yytext );
+View		printf( "VIEW\n" );
+@Override	printf( "OVERRIDE\n" );
+["][.]*["]	printf( "STRING\n" );
+[=]		printf( "ASSIGN\n" );
+[{]		{ printf( "BEGIN_FUNCTION\n" ); import_or_package = 0; }
+[}]		printf( "END_FUNCTION\n" );
+[;]		printf( "SEMICOLON\n" );
+[:]		printf( "COLON\n" );
+[,]		printf( "COMMA\n" );
+[(]		printf( "L_PAREN\n" );
+[)]		printf( "R_PAREN\n" );
+[+]		printf( "PLUS\n" );
+[-]		printf( "SUBTRACT\n" );
+[/]		printf( "DIVIDE\n" );
+[*]		printf( "MULTIPLY\n" );
+[/][/]+.*	printf( "COMMENT\n" );
+[a-zA-Z]+"."[a-zA-Z]+["."[a-zA-Z]+]*	{
+
+	if( import_or_package ) 
+		printf( "IMPORT/PACKAGE %s\n" , yytext );
+}
+[a-zA-Z]+[a-zA-Z0-9]*	printf( "VARIABLE %s\n" , yytext );	
+[0-9]+		printf( "INTEGER %s\n" , yytext );
+[ ]		printf( "" );
+\n		printf( "" );
+\t		printf( "" );
+%%
+
+main()
+{
+  yylex();
+}
