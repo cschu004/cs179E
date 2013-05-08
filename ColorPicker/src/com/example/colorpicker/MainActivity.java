@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		addListenerOnButton();
+		addListenerOnButton2();
 	}
  
 	public void addListenerOnButton() {
@@ -34,6 +35,26 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
  
 			    Intent intent = new Intent(context, RGB.class);
+                            startActivity(intent);   
+ 
+			}
+ 
+		});
+ 
+	}
+	
+	public void addListenerOnButton2() {
+		 
+		final Context context = this;
+ 
+		button = (Button) findViewById(R.id.button2);
+ 
+		button.setOnClickListener(new OnClickListener() {
+ 
+			@Override
+			public void onClick(View arg0) {
+ 
+			    Intent intent = new Intent(context, ColorPick.class);
                             startActivity(intent);   
  
 			}

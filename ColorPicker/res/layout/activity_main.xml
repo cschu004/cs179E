@@ -18,16 +18,24 @@
         android:layout_marginTop="117dp"
         android:text="RGB Color Picker"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ff00ff" />
+        android:textColor="#CC0066" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:text="RGB to Color"
+        android:textColor="#7f00ff" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="47dp"
-        android:textColor="#7f00ff" 
-        android:text="Enter RGB Values" />
+        android:layout_marginBottom="60dp"
+        android:text="Color to Hex" />
     
     </RelativeLayout>

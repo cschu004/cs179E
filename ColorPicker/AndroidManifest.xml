@@ -23,9 +23,17 @@
             </intent-filter>
              </activity>
             <activity
-            android:label="@string/app_name"
-            android:name="RGB" >
-        </activity>
+            	android:label="@string/app_name"
+            	android:name="RGB" >
+        	</activity>
+        	<activity
+            	android:label="@string/app_name"
+            	android:name="ColorPick" >
+        	</activity>
+        	<activity
+            	android:label="@string/app_name"
+            	android:name="Values" >
+       	 	</activity>
     </application>
 
 </manifest>
