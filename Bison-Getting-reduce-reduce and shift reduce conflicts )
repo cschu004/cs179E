@@ -1,0 +1,137 @@
+%{
+  #include "y.tab.h"
+	#include "stdio.h"
+	int line = 1;
+%}
+
+%union
+{
+	char * str;
+}
+
+%error-verbose
+%token PACKAGE
+%token IMPORT
+%token IDENTIFIER
+%token TYPE
+%token DOT
+%token STAR
+%token EXTENDS
+%token INTERFACE
+%token ASSIGN
+%token IF
+%token ENDIF
+%token COMMA
+%token THEN
+%token BEGIN_BRACE
+%token END_BRACE
+%token WHILE
+%token SEMICOLON
+%token PUBLIC
+%token VOID
+%token BOOLEAN
+%token PRIVATE
+%token PROTECTED
+%token STATIC
+%token FINAL
+%token ABSTRACT
+%token CLASS
+%left PLUS MINUS
+%left MULT DIV
+%left L_PAREN R_PAREN
+%left EQUAL GREATR_THAN_EQUAL LESS_THAN_EQUAL LESS_THAN GREATER_THAN
+%start Program
+
+%%
+Program : Import_Stmnt Modifiers CLASS IDENTIFIER EXTENDS IDENTIFIER BEGIN_BRACE Declare_Variable Function_Stmnt END_BRACE
+;
+
+Import_Stmnt : IMPORT IDENTIFIER SEMICOLON
+			| PACKAGE IDENTIFIER SEMICOLON
+			| IMPORT IDENTIFIER SEMICOLON Import_Stmnt
+			| PACKAGE IDENTIFIER SEMICOLON Import_Stmnt
+			;
+
+Function_Stmnt : Modifiers Type IDENTIFIER BEGIN_BRACE Body_Stmnt END_BRACE
+			   ;
+
+Type : VOID
+	| BOOLEAN
+	;
+
+Body_Stmnt : IDENTIFIER ASSIGN Expression
+		 | IF Condition_Stmnt THEN Stmnt2 ENDIF
+		 | WHILE Condition_Stmnt BEGIN_BRACE Stmnt2 END_BRACE
+;
+
+Declare_Variable : Modifiers Type IDENTIFIER ASSIGN Value1 SEMICOLON
+				| /*epsilon*/
+;
+
+Value1 : IDENTIFIER
+	| IDENTIFIER COMMA Value1
+;
+
+Stmnt2 : Body_Stmnt SEMICOLON
+	   | Body_Stmnt SEMICOLON Stmnt2
+;
+
+Condition_Stmnt : Expression Comp Expression
+		      | L_PAREN Condition_Stmnt R_PAREN
+;
+
+Expression : Mult_Expression Add_Expression
+;
+
+Add_Expression : /*epsilon*/
+		    | Op1 Mult_Expression Add_Expression
+;
+
+Op1 : PLUS
+	| MINUS
+	;
+
+Mult_Expression : Term Mult_Expression1
+;
+
+Mult_Expression1 : /*epsilon*/
+				| Op2 Term Mult_Expression1
+;
+
+Op2 : MULT
+	| DIV
+	;
+
+Term : IDENTIFIER
+| L_PAREN Expression R_PAREN
+;	
+
+Comp : EQUAL
+	| LESS_THAN
+	| GREATER_THAN
+	| LESS_THAN_EQUAL
+	| GREATR_THAN_EQUAL
+;
+
+Modifiers : PUBLIC
+	 | PRIVATE
+	 | PROTECTED
+	 | STATIC
+	 | FINAL
+	 | ABSTRACT
+	 | /*epsilon*/
+	;
+%%
+
+main()
+{
+  yyparse();
+}
+
+yyerror(char * s)
+{
+  if( yylval.str[0] == ':' )
+    printf( "\nSyntax Error at line %d: \"%s\" expected\n" , line , yylval.str );
+  else
+    printf( "\nSyntax Error at line %d: invalid declaration\n" , line );
+}
