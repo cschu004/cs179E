@@ -34,28 +34,30 @@ b [A-Z]
 "="		{return EQUALS;}
 "\""	{return QUOTE;}
 "RelativeLayout"			{return RELATIVELAYOUT;}
-"TextView"					{return TEXTVIEW;}
-"Button"					{return BUTTON;}
-"xmlns"						{return XMLNS;}
-"android"					{return ANDROID;}
-"tools"						{return TOOLS;}
-"layout_width"				{return LAYOUTWIDTH;}
-"layout_height"				{return LAYOUTHEIGHT;}
-"context"					{return CONTEXT;}
-"id"						{return ID;}
-"layout_alignParentRight"	{return LAYOUTALIGNPARENTRIGHT;}
-"layout_alignParentLeft"	{return LAYOUTALIGNPARENTLEFT;}
-"layout_alignParentTop"		{return LAYOUTALIGNPARENTTOP;}
-"layout_marginRight"		{return LAYOUTMARGINRIGHT;}
-"layout_marginTop"			{return LAYOUTMARGINTOP;}
-"text"						{return TEXT;}
-"layout_below"				{return LAYOUTBELOW;}
-"layout_marginLeft"			{return LAYOUTMARGINLEFT;}
-"onClick"					{return ONCLICK;}
-\n	        {return NEWLINE;}
+"TextView"					{yylval.val = strdup(yytext); return TEXTVIEW;}
+"Button"					{yylval.val = strdup(yytext); return BUTTON;}
+"xmlns"						{yylval.val = strdup(yytext); return XMLNS;}
+"android"					{yylval.val = strdup(yytext); return ANDROID;}
+"tools"						{yylval.val = strdup(yytext); return TOOLS;}
+"layout_width"				{yylval.val = strdup(yytext); return LAYOUTWIDTH;}
+"layout_height"				{yylval.val = strdup(yytext); return LAYOUTHEIGHT;}
+"context"					{yylval.val = strdup(yytext); return CONTEXT;}
+"id"						{yylval.val = strdup(yytext); return ID;}
+"layout_alignParentRight"	{yylval.val = strdup(yytext); return LAYOUTALIGNPARENTRIGHT;}
+"layout_alignParentLeft"	{yylval.val = strdup(yytext); return LAYOUTALIGNPARENTLEFT;}
+"layout_alignParentTop"		{yylval.val = strdup(yytext); return LAYOUTALIGNPARENTTOP;}
+"layout_alignParentBottom"	{yylval.val = strdup(yytext); return LAYOUTALIGNPARENTBOTTOM;}
+"layout_marginRight"		{yylval.val = strdup(yytext); return LAYOUTMARGINRIGHT;}
+"layout_marginLeft"			{yylval.val = strdup(yytext); return LAYOUTMARGINLEFT;}
+"layout_marginBottom"		{yylval.val = strdup(yytext); return LAYOUTMARGINBOTTOM;}
+"layout_marginTop"			{yylval.val = strdup(yytext); return LAYOUTMARGINTOP;}
+"text"						{yylval.val = strdup(yytext); return TEXT;}
+"layout_below"				{yylval.val = strdup(yytext); return LAYOUTBELOW;}
+"onClick"					{yylval.val = strdup(yytext); return ONCLICK;}
+\n
 
 
-\".*\"		{return LITERAL;}
+\".*\"		{yylval.val = strdup(yytext); return LITERAL;}
 
 .	{printf("error at line %d, column %d: unrecognized symbol \"%s\"",line,col,yytext); exit(-1);}
 %%

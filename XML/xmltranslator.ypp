@@ -1,12 +1,13 @@
 %{
 #include <iostream>
 #include <string>
-#include <map>
+#include "xmlcodegen.cpp"
 using namespace std;
 
 extern FILE *yyin;
 
-//-- Lexer prototype required by bison, aka getNextToken()
+table vartable;
+row r;
 int yylex(); 
 int yyerror(const char *p) { cerr << "Error!" << endl; }
 %}
@@ -15,17 +16,65 @@ int yyerror(const char *p) { cerr << "Error!" << endl; }
   char sym;
   char* val; 
 };
-%token	<val> RELATIVELAYOUT TEXTVIEW BUTTON XMLNS ANDROID TOOLS LAYOUTWIDTH LAYOUTHEIGHT CONTEXT ID LAYOUTALIGNPARENTRIGHT LAYOUTALIGNPARENTLEFT LAYOUTALIGNPARENTTOP LAYOUTMARGINRIGHT LAYOUTMARGINTOP TEXT LAYOUTBELOW LAYOUTMARGINLEFT ONCLICK LITERAL
-%token	<sym> LANGLE RANGLE SLASH COLON EQUALS QUOTE NEWLINE
+%token<val> RELATIVELAYOUT TEXTVIEW BUTTON XMLNS ANDROID TOOLS LAYOUTWIDTH LAYOUTHEIGHT CONTEXT ID LAYOUTALIGNPARENTRIGHT LAYOUTALIGNPARENTLEFT LAYOUTALIGNPARENTTOP LAYOUTALIGNPARENTBOTTOM LAYOUTMARGINRIGHT LAYOUTMARGINTOP LAYOUTMARGINBOTTOM TEXT LAYOUTBELOW LAYOUTMARGINLEFT ONCLICK LITERAL
+%token<sym> LANGLE RANGLE SLASH COLON EQUALS QUOTE NEWLINE
 
+%type<val> widgets options1 options2 options3
 %%
 
-start: LANGLE RELATIVELAYOUT continue RANGLE NEWLINE	{cout << "YES!";}
+start: LANGLE RELATIVELAYOUT continue RANGLE end	{vartable.print(); return 0;}
 continue:	|
-			NEWLINE continue |
-			options1 COLON options2 EQUALS LITERAL continue
+			options1 COLON options2 EQUALS LITERAL continue 
 options1:	XMLNS | ANDROID | TOOLS
 options2:	ANDROID | TOOLS | LAYOUTHEIGHT | LAYOUTWIDTH | CONTEXT
+end:		LANGLE widgets {r.Type($2); } continue2 {vartable.insert(r); r.clear();} SLASH RANGLE end 
+			| LANGLE SLASH RELATIVELAYOUT RANGLE
+widgets:	TEXTVIEW	{$$ = $1;}	
+			| BUTTON	{$$ = $1;}
+continue2:	|
+			ANDROID COLON options3 EQUALS LITERAL { string temp1 = strdup($3);
+													string temp2 = strdup($5);
+													if(temp1 == "id")
+															r.Name(temp2);
+													else if (temp1 == "layout_marginRight"){
+															string y = temp2.substr(1,temp2.find("dp")-1);
+															int x = atoi(y.c_str());
+															r.X_coord(x);
+															}
+													else if (temp1 == "layout_marginLeft"){
+															string y = temp2.substr(1,temp2.find("dp")-1);
+															int x = atoi(y.c_str());
+															r.X_coord(480 - x);
+															}
+													else if (temp1 == "layout_marginTop"){
+															string y = temp2.substr(1,temp2.find("dp")-1);
+															int x = atoi(y.c_str());
+															r.Y_coord(640 - x);
+															}
+													else if (temp1 == "layout_marginBottom"){
+															string y = temp2.substr(1,temp2.find("dp")-1);
+															int x = atoi(y.c_str());
+															r.Y_coord(x);
+															}
+													else if (temp1 == "text")
+															r.Text(temp2);
+													else if (temp1 == "onClick")
+															r.Onclick(temp2);
+														} continue2
+options3:	LAYOUTWIDTH					{$$ = $1;}
+			| LAYOUTHEIGHT 				{$$ = $1;}
+			| ID 						{$$ = $1;}
+			| LAYOUTALIGNPARENTRIGHT 	{$$ = $1;}
+			| LAYOUTALIGNPARENTLEFT 	{$$ = $1;}
+			| LAYOUTALIGNPARENTTOP 		{$$ = $1;}
+			| LAYOUTALIGNPARENTBOTTOM 	{$$ = $1;}
+			| LAYOUTMARGINBOTTOM 		{$$ = $1;}
+			| LAYOUTMARGINRIGHT 		{$$ = $1;}
+			| LAYOUTMARGINTOP 			{$$ = $1;}
+			| TEXT 						{$$ = $1;}
+			| LAYOUTBELOW 				{$$ = $1;}
+			| LAYOUTMARGINLEFT 			{$$ = $1;}
+			| ONCLICK					{$$ = $1;}
 
 %%
 
