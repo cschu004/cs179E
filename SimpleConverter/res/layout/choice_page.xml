@@ -21,18 +21,16 @@
          android:id="@+id/button2"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_below="@+id/button1"
+         android:layout_marginTop="134dp"
          android:layout_centerHorizontal="true"
-         android:layout_marginTop="20dp"
          android:text="Miles -- Kilometers" />
 
      <Button
          android:id="@+id/button3"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_below="@+id/button2"
+         android:layout_marginTop="194dp"
          android:layout_centerHorizontal="true"
-         android:layout_marginTop="26dp"
          android:text="Yards -- Meters" />
     
     </RelativeLayout>

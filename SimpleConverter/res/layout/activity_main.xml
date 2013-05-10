@@ -12,8 +12,7 @@
         android:id="@+id/reset"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Value1"
-        android:layout_gravity="center_horizontal"
+        
         android:text="Reset"
         android:layout_below="@+id/convert" />
     
@@ -22,18 +21,17 @@
         android:id="@+id/convert"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/reset"
-        android:layout_below="@+id/Value2"
-        android:layout_gravity="center"
+      
+        android:layout_marginTop="90dp"
+    
         android:text="Convert" />
 
     <EditText
         android:id="@+id/Value1"
         android:layout_width="120sp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Value1"
-        android:layout_below="@+id/Value1"
-        android:layout_marginTop="23dp"
+      
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="0.0"
         android:inputType="numberDecimal" >
@@ -44,9 +42,7 @@
     <EditText
         android:id="@+id/Value2"
         android:layout_width="120sp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Value1"
-        android:layout_below="@+id/Value1"
+        android:layout_height="wrap_content"     
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="0.0"
@@ -56,18 +52,18 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Value2"
-        android:layout_centerHorizontal="true"
-        android:text="Inches"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="120dp"
+        android:text="Centimeters"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/convert"
-        android:layout_alignLeft="@+id/textView1"
-        android:text="Centimeters"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="Inches"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     
 </RelativeLayout>
