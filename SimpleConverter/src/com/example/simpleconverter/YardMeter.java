@@ -68,9 +68,9 @@ v2. setText(Double.toString(val2));
 }
 
 double YToM(double val)
-{return(val/1.09361);}
-double MToY(double val)
 {return(val*1.09361);}
+double MToY(double val)
+{return(val/1.09361);}
 
 void reset()
 {

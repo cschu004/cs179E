@@ -68,9 +68,9 @@ v2. setText(Double.toString(val2));
 }
 
 double InchToCm(double val)
-{return(val*2.54);}
-double CmToInch(double val)
 {return(val/2.54);}
+double CmToInch(double val)
+{return(val*2.54);}
 
 void reset()
 {

@@ -12,9 +12,9 @@
         android:id="@+id/reset"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        
-        android:text="Reset"
-        android:layout_below="@+id/convert" />
+        android:layout_marginTop="140dp"
+        android:text="Reset"/>
+    
     
 
     <Button

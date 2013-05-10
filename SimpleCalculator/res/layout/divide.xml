@@ -8,9 +8,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="17dp"
+        android:layout_marginTop="400dp"
         android:text="Clear" />
 
     <EditText
@@ -19,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="180dp"
         android:hint="0.0"
         android:ems="10"
         android:inputType="numberDecimal" />
@@ -27,9 +27,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Value1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="290dp"
         android:text="="
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -37,18 +36,16 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Value1"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="27dp"
+        android:layout_marginTop="160dp"
         android:text="/" />
 
     <EditText
         android:id="@+id/Value2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="100dp"
         android:hint="0.0"
         android:ems="10"
         android:inputType="numberDecimal" >

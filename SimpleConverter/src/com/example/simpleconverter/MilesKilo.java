@@ -68,9 +68,9 @@ v2. setText(Double.toString(val2));
 }
 
 double MiToK(double val)
-{return(val*1.60934);}
-double KToMi(double val)
 {return(val/1.60934);}
+double KToMi(double val)
+{return(val*1.60934);}
 
 void reset()
 {
