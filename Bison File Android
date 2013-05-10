@@ -1,0 +1,155 @@
+%{
+	#include "y.tab.h"
+	#include "stdio.h"
+	int line = 0;
+	int snum = 0;
+%}
+%union
+{
+	char * str;
+  	int num;
+};
+%error-verbose
+%token PACKAGE
+%token LIBRARY
+%token IMPORT
+%token IDENTIFIER
+%token TYPE
+%token DOT
+%token STAR
+%token EXTENDS
+%token INTERFACE
+%token ASSIGN
+%token IF
+%token ENDIF
+%token COMMA
+%token THEN
+%token BEGIN_BRACE
+%token END_BRACE
+%token WHILE
+%token SEMICOLON
+%token COLON
+%token PUBLIC
+%token VOID
+%token BOOLEAN
+%token RETURN
+%token TRUE
+%token FALSE
+%token PRIVATE
+%token PROTECTED
+%token STATIC
+%token FINAL
+%token ABSTRACT
+%token CLASS
+%left PLUS MINUS
+%left MULT DIV
+%left L_PAREN R_PAREN
+%left EQUAL GREATR_THAN_EQUAL LESS_THAN_EQUAL LESS_THAN GREATER_THAN
+%type<str>IDENTIFIER PUBLIC PRIVATE PROTECTED
+
+%%
+Main_Program : Program
+;
+
+Program : Modifiers Type ident1 Arg1 Begin_funct Body_Stmnt End_funct Program
+		| /*epsilon*/
+;
+
+Begin_funct : BEGIN_BRACE { printf( "BEGIN_BRACE\n" ); }
+;
+
+End_funct : END_BRACE { printf( "END_BRACE\n" ); }
+
+ident1 : IDENTIFIER { printf( "Function Name -> %s\n", $1 ); }
+;
+
+Arg1 : IDENTIFIER { printf( "Argument -> %s\n" , $1 ); }
+	;
+
+Type : VOID	{ printf( "Type -> VOID\n" ); }
+	| BOOLEAN { printf( "Type -> VOID\n" ); }
+	;
+
+Body_Stmnt : Body1 Body_Stmnt
+		| Body2 Body_Stmnt
+		| Body3 Body_Stmnt
+		| Body4 Body_Stmnt
+		| Body5 Body_Stmnt
+		| IF Condition_Stmnt THEN Stmnt2 ENDIF
+		| /*epsilon*/
+;
+
+Body1 : IDENTIFIER SEMICOLON { snum++; printf( "Statement%i -> %s;\n" , snum, $1); }
+;
+
+Body2 : IDENTIFIER IDENTIFIER ASSIGN L_PAREN IDENTIFIER R_PAREN IDENTIFIER L_PAREN IDENTIFIER R_PAREN SEMICOLON{ snum++; printf( "Statement%i -> %s %s = (%s) %s(%s);\n" , snum, $1, $2, $5, $7, $9); }
+
+Body3 : IDENTIFIER L_PAREN IDENTIFIER R_PAREN SEMICOLON { snum++; printf( "Statement%i -> %s(%s);\n" , snum, $1, $3); }
+;
+
+Body4 : RETURN TRUE SEMICOLON { snum++; printf( "Statement%i -> Return true;\n" , snum); }
+		| RETURN FALSE SEMICOLON { snum++; printf( "Statement%i -> Return false;\n" , snum); }
+;
+
+Body5 : IDENTIFIER L_PAREN PLUS L_PAREN IDENTIFIER PLUS IDENTIFIER R_PAREN R_PAREN SEMICOLON { snum++; printf( "Statement%i -> %s( + (%s + %s) );\n" , snum, $1, $5, $7); }
+;
+
+Stmnt2 : Body_Stmnt SEMICOLON
+	   | Body_Stmnt SEMICOLON Stmnt2
+;
+
+Condition_Stmnt : Expression Comp Expression
+		      | L_PAREN Condition_Stmnt R_PAREN
+;
+
+Expression : Mult_Expression Add_Expression
+;
+
+Add_Expression : /*epsilon*/
+		    | Op1 Mult_Expression Add_Expression
+;
+
+Op1 : PLUS
+	| MINUS
+	;
+
+Mult_Expression : Term Mult_Expression1
+;
+
+Mult_Expression1 : /*epsilon*/
+				| Op2 Term Mult_Expression1
+;
+
+Op2 : MULT
+	| DIV
+	;
+
+Term : IDENTIFIER
+| L_PAREN Expression R_PAREN
+;	
+
+Comp : EQUAL
+	| LESS_THAN
+	| GREATER_THAN
+	| LESS_THAN_EQUAL
+	| GREATR_THAN_EQUAL
+;
+
+Modifiers : PUBLIC { printf( "Public -> PUBLIC\n" ); }
+	 | PRIVATE { printf( "Private -> PRIVATE\n" ); }
+	 | PROTECTED { printf( "Protected -> PROTECTED\n" ); }
+	 | STATIC
+	 | FINAL
+	 | ABSTRACT
+	;
+%%
+
+main()
+{
+  yyparse();
+}
+
+yyerror(char * s)
+{
+	printf( "sjdfkljwelfjw: %s\n" , s );
+}
