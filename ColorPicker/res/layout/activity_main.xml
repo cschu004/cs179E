@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FF00FF"
     tools:context=".StartPage" >
 
     <TextView
@@ -10,38 +11,32 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-<<<<<<< HEAD
         android:layout_marginTop="117dp"
         android:text="RGB Color Picker"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="#AAAAAA"
         android:textColor="#CC0066" />
-=======
-        android:layout_marginTop="200dp"
-        android:text="RGB Color Picker" />
->>>>>>> added codegen.cpp and updated grammar for xml parser
+
+   
+
 
     <Button
         android:id="@+id/button1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_above="@+id/button2"
         android:layout_centerHorizontal="true"
         android:text="RGB to Color"
+        android:layout_marginTop="350dp"
         android:textColor="#7f00ff" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="400dp"
         android:text="Color to Hex" />
-=======
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
-        android:text="Enter RGB Values" />
->>>>>>> added codegen.cpp and updated grammar for xml parser
+       
+
     
     </RelativeLayout>

@@ -8,9 +8,8 @@
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="21dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="100dp"
         android:background="#CCFF99"
         android:text="" />
 
@@ -18,8 +17,8 @@
         android:id="@+id/button6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button5"
-        android:layout_alignLeft="@+id/button3"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="100dp"
         android:background="#009900"
         android:text="" />
 
@@ -27,9 +26,8 @@
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_below="@+id/button4"
-        android:layout_marginTop="21dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="166dp"
         android:background="#99FFFF"
         android:text="" />
 
@@ -37,9 +35,8 @@
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button8"
-        android:layout_alignBottom="@+id/button8"
-        android:layout_alignLeft="@+id/button6"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="166dp"
         android:background="#0000FF"
         android:text="" />
 
@@ -47,9 +44,8 @@
         android:id="@+id/button10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button7"
-        android:layout_below="@+id/button7"
-        android:layout_marginTop="22dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="232dp"
         android:background="#FF66FF"
         android:text="" />
 
@@ -57,9 +53,8 @@
         android:id="@+id/button11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button10"
-        android:layout_alignBottom="@+id/button10"
-        android:layout_alignRight="@+id/button8"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="232dp"
         android:background="#CC00CC"
         android:text="" />
 
@@ -67,9 +62,8 @@
         android:id="@+id/button13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button10"
-        android:layout_below="@+id/button10"
-        android:layout_marginTop="18dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="296dp"
         android:background="#C0C0C0"
         android:text="" />
 
@@ -77,9 +71,8 @@
         android:id="@+id/button14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button13"
-        android:layout_alignBottom="@+id/button13"
-        android:layout_alignLeft="@+id/button11"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="296dp"
         android:background="#404040"
         android:text="" />
 
@@ -87,9 +80,8 @@
         android:id="@+id/button15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button14"
-        android:layout_alignBottom="@+id/button14"
-        android:layout_alignLeft="@+id/button12"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="296dp"
         android:background="#000000"
         android:text="" />
 
@@ -97,8 +89,8 @@
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button10"
-        android:layout_toLeftOf="@+id/button3"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="166dp"
         android:background="#0080FF"
         android:text="" />
 
@@ -106,8 +98,8 @@
         android:id="@+id/button12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button13"
-        android:layout_alignLeft="@+id/button9"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="232dp"
         android:background="#FF0000"
         android:text="" />
 
@@ -115,9 +107,8 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button4"
-        android:layout_marginLeft="28dp"
-        android:layout_toRightOf="@+id/button2"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="34dp"
         android:background="#FFFF33"
         android:text="" />
 
@@ -125,8 +116,8 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button4"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="34dp"
         android:background="#FFFF99"
         android:text="" />
 
@@ -134,8 +125,8 @@
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button7"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="100dp"
         android:background="#99FF33"
         android:text="" />
 
@@ -143,10 +134,8 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="26dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="34dp"
-        android:layout_toLeftOf="@+id/button2"
         android:background="#FFFFFF"
         android:text="" />
 
