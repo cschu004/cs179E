@@ -2,11 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#E0E0E0"
     android:id="@+id/layout"
     tools:context=".StartPage" >
 
@@ -16,97 +11,83 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="142dp"
-        android:hint="0"
-        android:ems="10"
-        android:inputType="number" >
-
-        <requestFocus />
-    </EditText>
+        android:layout_marginTop="100dp"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/Value2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Value1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:hint="0"
-        android:ems="10"
+        android:layout_marginTop="200dp"
         android:inputType="number" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Value1"
-        android:layout_alignBottom="@+id/Value1"
-        android:layout_toLeftOf="@+id/Value1"
-        android:text="R"
-        android:textColor="#CC0000"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Value2"
-        android:layout_alignBottom="@+id/Value2"
-        android:layout_toLeftOf="@+id/Value2"
-        android:text="G"
-        android:textColor="#66CC00"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Value3"
-        android:layout_alignBottom="@+id/Value3"
-        android:layout_toLeftOf="@+id/Value3"
-        android:text="B"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#0066CC" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="68dp"
-        android:gravity="center"
-        android:text="Enter Values(0-255)"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/Value3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Value2"
-        android:layout_below="@+id/Value2"
-        android:layout_marginTop="38dp"
-        android:hint="0"
-        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
         android:inputType="number" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
         android:textColor="#ff8000" 
         android:text="Color!" />
 
     <Button
         android:id="@+id/button2"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
         android:textColor="#ffffff"
         android:text="Clear" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Enter Values(0-255)"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+   <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:text="R"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#CC0000" />
+   
+            
+   <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="175dp"
+        android:text="G"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#66CC00" />
+   
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="275dp"
+        android:text="B"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#0066CC" />   
+
+
     
     </RelativeLayout>

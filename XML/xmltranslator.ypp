@@ -1,6 +1,7 @@
 %{
 #include <iostream>
 #include <string>
+#include "dirent.h"
 #include "xmlcodegen.cpp"
 using namespace std;
 
@@ -16,21 +17,26 @@ int yyerror(const char *p) { cerr << "Error!" << endl; }
   char sym;
   char* val; 
 };
-%token<val> RELATIVELAYOUT TEXTVIEW BUTTON XMLNS ANDROID TOOLS LAYOUTWIDTH LAYOUTHEIGHT CONTEXT ID LAYOUTALIGNPARENTRIGHT LAYOUTALIGNPARENTLEFT LAYOUTALIGNPARENTTOP LAYOUTALIGNPARENTBOTTOM LAYOUTMARGINRIGHT LAYOUTMARGINTOP LAYOUTMARGINBOTTOM TEXT LAYOUTBELOW LAYOUTMARGINLEFT ONCLICK LITERAL
+%token<val> RELATIVELAYOUT TEXTVIEW BUTTON EDITTEXT XMLNS ANDROID TOOLS LAYOUTWIDTH LAYOUTHEIGHT CONTEXT ID LAYOUTALIGNPARENTRIGHT LAYOUTALIGNPARENTLEFT LAYOUTALIGNPARENTTOP LAYOUTALIGNPARENTBOTTOM LAYOUTMARGINRIGHT LAYOUTMARGINTOP LAYOUTMARGINBOTTOM TEXT LAYOUTBELOW LAYOUTMARGINLEFT ONCLICK LITERAL PADDINGBOTTOM PADDINGLEFT PADDINGRIGHT PADDINGTOP BACKGROUND LAYOUT_CENTERHORIZONTAL TEXTAPPEARANCE TEXTCOLOR INPUTTYPE LAYOUTABOVE LAYOUTCENTERVERTICAL
 %token<sym> LANGLE RANGLE SLASH COLON EQUALS QUOTE NEWLINE
 
-%type<val> widgets options1 options2 options3
+%type<val> widgets options1 options2 options3 XML JAVA
+
 %%
 
-start: LANGLE RELATIVELAYOUT continue RANGLE end	{vartable.print(); return 0;}
+start: XML | JAVA
+
+XML: LANGLE RELATIVELAYOUT continue RANGLE end	{return 0;}
+JAVA: LANGLE RANGLE	{cout << "JAVA!";}
 continue:	|
 			options1 COLON options2 EQUALS LITERAL continue 
 options1:	XMLNS | ANDROID | TOOLS
-options2:	ANDROID | TOOLS | LAYOUTHEIGHT | LAYOUTWIDTH | CONTEXT
+options2:	ID| ANDROID | TOOLS | LAYOUTHEIGHT | LAYOUTWIDTH | CONTEXT | PADDINGBOTTOM | PADDINGLEFT | PADDINGRIGHT | PADDINGTOP | BACKGROUND | LAYOUT_CENTERHORIZONTAL | TEXTAPPEARANCE | TEXTCOLOR | INPUTTYPE | LAYOUTABOVE | LAYOUTCENTERVERTICAL
 end:		LANGLE widgets {r.Type($2); } continue2 {vartable.insert(r); r.clear();} SLASH RANGLE end 
 			| LANGLE SLASH RELATIVELAYOUT RANGLE
 widgets:	TEXTVIEW	{$$ = $1;}	
 			| BUTTON	{$$ = $1;}
+			| EDITTEXT	{$$ = $1;}
 continue2:	|
 			ANDROID COLON options3 EQUALS LITERAL { string temp1 = strdup($3);
 													string temp2 = strdup($5);
@@ -60,6 +66,10 @@ continue2:	|
 															r.Text(temp2);
 													else if (temp1 == "onClick")
 															r.Onclick(temp2);
+													else if (temp1 == "layout_centerHorizontal" and temp2 == "\"true\"")
+															r.X_coord(240);
+													else if (temp1 == "layout_centerVertical" and temp2 == "\"true\"")
+															r.Y_coord(320);
 														} continue2
 options3:	LAYOUTWIDTH					{$$ = $1;}
 			| LAYOUTHEIGHT 				{$$ = $1;}
@@ -72,17 +82,41 @@ options3:	LAYOUTWIDTH					{$$ = $1;}
 			| LAYOUTMARGINRIGHT 		{$$ = $1;}
 			| LAYOUTMARGINTOP 			{$$ = $1;}
 			| TEXT 						{$$ = $1;}
+			| LAYOUTABOVE				{$$ = $1;}
 			| LAYOUTBELOW 				{$$ = $1;}
 			| LAYOUTMARGINLEFT 			{$$ = $1;}
 			| ONCLICK					{$$ = $1;}
+			| PADDINGBOTTOM				{$$ = $1;}
+			| PADDINGLEFT 				{$$ = $1;}
+			| PADDINGRIGHT 				{$$ = $1;}
+			| PADDINGTOP				{$$ = $1;}
+			| BACKGROUND				{$$ = $1;}
+			| LAYOUT_CENTERHORIZONTAL	{$$ = $1;}
+			| TEXTAPPEARANCE			{$$ = $1;}
+			| TEXTCOLOR					{$$ = $1;}
+			| INPUTTYPE					{$$ = $1;}
+			| LAYOUTCENTERVERTICAL		{$$ = $1;}
 
 %%
 
 int main(int argc, char **argv){
 		++argv; --argc;
-		if(argc > 0)
-			yyin = fopen(argv[0], "r");
-		else
+		if(argc > 0){
+			vector<string> xml;
+			xml.push_back(argv[0]);
+			vector<string> root = iterativeprint(xml);
+			xml.clear();
+			vector<string> java;
+			cleanup( root, xml, java);
+			for( int i = 0; i < xml.size(); i++){
+				yyin = fopen(xml[i].c_str(), "r");
+				yyparse();
+				}
+			vartable.print();
+			}
+		else{
 			yyin = stdin;
-		yyparse();
+			yyparse();
+			}
+		
 }

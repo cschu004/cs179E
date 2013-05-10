@@ -16,8 +16,8 @@ class row{
 	row(){
 		type="";
 		name="";
-		x_coord=-1;
-		y_coord=-1;
+		x_coord=0;
+		y_coord=0;
 		text="";
 		onclick="";
 		}
@@ -44,8 +44,8 @@ class row{
 	void clear(){
 		type="";
 		name="";
-		x_coord=-1;
-		y_coord=-1;
+		x_coord=0;
+		y_coord=0;
 		text="";
 		onclick="";
 		}
@@ -69,3 +69,48 @@ class table{
 
 			
 };
+
+vector<string> printdirectory( string s){
+
+		DIR *dir;
+		struct dirent *ent;
+		struct dirent *ent2;
+		vector<string> vec;
+		const char* tmp = s.c_str();
+		
+		if ((dir = opendir (tmp)) != NULL) {
+  			while ((ent = readdir (dir)) != NULL) {
+  	  			string tmp = ent->d_name;
+  	  			if( tmp != "."  and tmp != ".."){
+  	  				vec.push_back(s + "/" + tmp);
+  					}
+  				}
+  		closedir (dir);
+		}
+		return vec; 
+
+}
+
+
+vector<string> iterativeprint(vector<string>v){
+		vector <string> vec = v;
+		vector<string> tmp;
+		for(int i = 0; i < vec.size(); i++){
+			tmp = printdirectory(vec[i]);
+			vec.insert(vec.end(), tmp.begin(), tmp.end());			
+		}
+		return vec;
+
+}
+
+void cleanup( vector<string> allfiles, vector<string> &xmlfiles, vector<string> &javafiles){
+	
+	for( int i = 0; i < allfiles.size(); i++){
+			if(allfiles[i].find("layout/") != std::string::npos and allfiles[i].substr(allfiles[i].size()-4) == ".xml"){
+				xmlfiles.push_back(allfiles[i]);
+			}
+			else if(allfiles[i].find("src/") != std::string::npos and allfiles[i].substr(allfiles[i].size()-5) == ".java"){
+				javafiles.push_back(allfiles[i]);
+			}
+	}
+}

@@ -166,6 +166,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int Value1=0x7f090011;
         public static final int Value2=0x7f090012;
         public static final int Value3=0x7f090016;
@@ -190,6 +191,19 @@ public final class R {
         public static final int textView2=0x7f090013;
         public static final int textView3=0x7f090014;
         public static final int textView4=0x7f090015;
+=======
+        public static final int Value1=0x7f080003;
+        public static final int Value2=0x7f080004;
+        public static final int Value3=0x7f080005;
+        public static final int action_settings=0x7f08000a;
+        public static final int button1=0x7f080001;
+        public static final int button2=0x7f080006;
+        public static final int layout=0x7f080002;
+        public static final int textView1=0x7f080000;
+        public static final int textView2=0x7f080007;
+        public static final int textView3=0x7f080008;
+        public static final int textView4=0x7f080009;
+>>>>>>> added codegen.cpp and updated grammar for xml parser
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

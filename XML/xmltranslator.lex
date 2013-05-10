@@ -53,7 +53,37 @@ b [A-Z]
 "layout_marginTop"			{yylval.val = strdup(yytext); return LAYOUTMARGINTOP;}
 "text"						{yylval.val = strdup(yytext); return TEXT;}
 "layout_below"				{yylval.val = strdup(yytext); return LAYOUTBELOW;}
+"paddingBottom"				{yylval.val = strdup(yytext); return PADDINGBOTTOM;}
+"paddingLeft"				{yylval.val = strdup(yytext); return PADDINGLEFT;}
+"paddingRight"				{yylval.val = strdup(yytext); return PADDINGRIGHT;}
+"paddingTop"				{yylval.val = strdup(yytext); return PADDINGTOP;}
+"background"				{yylval.val = strdup(yytext); return BACKGROUND;}
+"layout_centerHorizontal"	{yylval.val = strdup(yytext); return LAYOUT_CENTERHORIZONTAL;}
 "onClick"					{yylval.val = strdup(yytext); return ONCLICK;}
+"textAppearance"			{yylval.val = strdup(yytext); return TEXTAPPEARANCE;}
+"textColor"					{yylval.val = strdup(yytext); return TEXTCOLOR;}
+"EditText"					{yylval.val = strdup(yytext); return EDITTEXT;}
+"inputType"					{yylval.val = strdup(yytext); return INPUTTYPE;}
+"layout_above"				{yylval.val = strdup(yytext); return LAYOUTABOVE;}
+"layout_centerVertical"		{yylval.val = strdup(yytext); return LAYOUTCENTERVERTICAL;}
+"package"
+"import"
+"public"
+"class"
+"extends"
+"protected"
+"void"
+"boolean"
+"true"
+"false"
+"return"
+"Menu"
+"Bundle"
+
+
+
+
+
 \n
 
 
