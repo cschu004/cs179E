@@ -1,0 +1,228 @@
+%{
+  #include "y.tab.h"
+	#include "stdio.h"
+%}
+
+%union
+{
+	char * str;
+  	int num;
+};
+
+%error-verbose
+%token PUBLIC
+%token FINAL
+%token VOID
+%token IMPORT
+%token PACKAGE
+%token PRIVATE
+%token CLASS
+%token IF
+%token ELSE
+%token ELSEIF
+%token DOUBLE
+%token EXTENDS
+%token ACTIVITY
+%token INT
+%token RETURN
+%token SUPER
+%token THIS
+%token GT
+%token LT
+%token LCURLY
+%token RCURLY
+%token DOT
+%token MULT
+%token DIV
+%token COMMA
+%token SEMICOLON
+%token EQ
+%token LPAREN
+%token RPAREN
+%token BUNDLE
+%token VIEW
+%token BUTTON
+%token EDITTEXT
+%token CONTEXT INTENT GETTEXT SETTEXT LENGTH TOSTRING
+%token PARSEDOUBLE MAKETEXT ONCLICK LENGTH_LONG SHOW
+%token CHOICEPAGE ONCLICKLISTENER SETONCLICKLISTENER
+%token FINDVIEWBYID STARTACTIVITY SETCONTENTVIEW
+%token NEW
+%token TOAST
+%token R
+%token<str> VAR
+%token<str> INTEGER
+%left SEMICOLON LPAREN RPAREN MULT DIV DOT
+%right EQ
+%token LITERAL
+
+%%
+start	:	import PUBLIC CLASS val EXTENDS ACTIVITY LCURLY body_stmnt RCURLY	{printf("done with no errors!\n");}
+
+import	:	i_or_p library SEMICOLON
+		|	i_or_p library SEMICOLON import
+
+i_or_p	:	IMPORT				
+		|	PACKAGE				
+
+library	:	val
+		|	val DOT library
+
+val		:	VAR					
+		|	ACTIVITY			
+		|	BUNDLE				
+		|	VIEW				
+		|	BUTTON				
+		|	EDITTEXT			
+		|	TOAST				
+		|	CONTEXT
+		|	INTENT
+		|	ONCLICKLISTENER
+		|	CHOICEPAGE
+		|	R						
+		|	DOUBLE				
+
+body_stmnt	:	declare body_stmnt	
+			|	function body_stmnt
+			|	logic body_stmnt
+			|	assign_var body_stmnt
+			|	vartype VAR LPAREN val2 RPAREN LCURLY body_funct RCURLY body_stmnt
+			|
+
+assign_var	:	vartype multvar SEMICOLON
+
+vartype	:	VAR					
+		|	ACTIVITY			
+		|	BUNDLE				
+		|	VIEW				
+		|	BUTTON				
+		|	EDITTEXT			
+		|	TOAST				
+		|	CONTEXT
+		|	INTENT
+		|	ONCLICKLISTENER
+		|	STARTACTIVITY
+		|	R					
+		|	DOUBLE
+
+declare		:	class_type val multvar SEMICOLON 
+
+class_type	:	PRIVATE			
+			|	PUBLIC			
+			|	FINAL			
+
+multvar		:	VAR								
+			|	VAR COMMA multvar				
+			|	VAR EQ INTEGER					
+			|	VAR EQ INTEGER COMMA multvar
+
+function	:	class_type var_type funct_nm LPAREN val2 RPAREN LCURLY body_funct RCURLY 
+
+logic	:	var_type VAR LPAREN val2 RPAREN LCURLY body_funct RCURLY
+
+body_funct	:	SUPER DOT LPAREN VAR RPAREN SEMICOLON body_funct
+			|	SETCONTENTVIEW LPAREN accessval RPAREN SEMICOLON body_funct
+			|	VAR EQ assignment SEMICOLON body_funct
+			|	VAR DOT setonclick body_funct
+			|	vartype LPAREN arguments RPAREN SEMICOLON body_funct
+			|	TOAST DOT MAKETEXT LPAREN arguments RPAREN arguments SEMICOLON body_funct
+			|	ifcond body_funct
+			|	ELSE else_stmnt
+			|	VAR DOT SETTEXT LPAREN arguments RPAREN SEMICOLON body_funct
+			|	RETURN LPAREN arguments RPAREN SEMICOLON
+			|	class_type vartype VAR EQ arguments SEMICOLON body_funct
+			|	vartype VAR EQ arguments SEMICOLON body_funct
+			|
+
+arguments	:	THIS arguments
+			|	COMMA arguments
+			|	LITERAL arguments //string
+			|	TOAST arguments
+			|	DOT	arguments
+			|	VAR arguments
+			|	SHOW arguments
+			|	DOUBLE arguments
+			|	TOSTRING arguments
+			|	LPAREN lhs RPAREN arguments
+			|	LENGTH_LONG arguments
+			|	math arguments
+			|	NEW arguments
+			|	INTENT arguments
+			|
+
+math	:	value op value
+
+value	:	VAR
+		|	INTEGER
+
+op	:	DIV
+	|	MULT
+
+ifcond	:	IF LPAREN lhs cond rhs RPAREN LCURLY body_funct RCURLY
+		|	ELSEIF LPAREN lhs cond rhs RPAREN LCURLY body_funct RCURLY
+
+else_stmnt	:	LCURLY body_funct RCURLY
+			|	body_funct
+
+lhs	:	VAR lhs
+	|	GETTEXT lhs
+	|	LPAREN RPAREN lhs
+	|	DOT lhs
+	|	LENGTH lhs
+	|	TOSTRING lhs
+	|	COMMA lhs
+	|	CHOICEPAGE lhs
+	|	CLASS lhs
+	|
+
+rhs	:	VAR rhs
+	|	GETTEXT rhs
+	|	LPAREN RPAREN rhs
+	|	DOT rhs
+	|	LENGTH rhs
+	|	INTEGER rhs
+	|
+
+cond	:	LT
+		|	GT
+
+funct_nm	:	VAR
+			|	ONCLICK
+			|
+
+accessval	:	VAR
+			|	R
+			|	R DOT accessval
+			|	VAR DOT accessval
+
+assignment	:	LPAREN EDITTEXT RPAREN FINDVIEWBYID LPAREN accessval RPAREN
+			|	LPAREN BUTTON RPAREN FINDVIEWBYID LPAREN accessval RPAREN
+			|	VAR DOT PARSEDOUBLE LPAREN lhs RPAREN
+			|	VAR LPAREN lhs RPAREN
+
+setonclick	:	SETONCLICKLISTENER LPAREN NEW VIEW DOT ONCLICKLISTENER LPAREN RPAREN LCURLY function RCURLY RPAREN SEMICOLON
+			|	SETONCLICKLISTENER LPAREN NEW ONCLICKLISTENER LPAREN RPAREN LCURLY function RCURLY RPAREN SEMICOLON
+
+val2	:	VAR VAR					
+		|	ACTIVITY VAR			
+		|	BUNDLE VAR				
+		|	VIEW VAR				
+		|	BUTTON VAR				
+		|	EDITTEXT VAR			
+		|	TOAST VAR				
+		|	R VAR						
+		|	DOUBLE VAR				
+		|
+
+var_type	:	VOID
+%%
+
+main()
+{
+  yyparse();
+}
+
+yyerror(char * s)
+{
+	printf( "Error!!!! %s\n" , s );
+}
