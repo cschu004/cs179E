@@ -34,6 +34,11 @@ public final class R {
         public static final int page2=0x7f030002;
         public static final int page3=0x7f030003;
         public static final int page4=0x7f030004;
+        public static final int page5=0x7f030005;
+        public static final int page6=0x7f030006;
+        public static final int page7=0x7f030007;
+        public static final int page8=0x7f030008;
+        public static final int page9=0x7f030009;
     }
     public static final class menu {
         public static final int main=0x7f070000;

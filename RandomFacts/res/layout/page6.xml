@@ -12,7 +12,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click to generate a fact!" />
+        android:text="Fact 8: The most common name in the world is Mohammed." />
 
     <Button
         android:id="@+id/button1"
@@ -21,8 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Generate"
-        android:onClick="NEXT" />
-    
+        android:text="Generate" 
+        android:onClick="NEXT"/>
 
 </RelativeLayout>

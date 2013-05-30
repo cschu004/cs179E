@@ -38,6 +38,26 @@
             	android:label="@string/app_name"
             	android:name="Page4" >
         	</activity>
+        	 <activity
+            	android:label="@string/app_name"
+            	android:name="Page5" >
+        	</activity>
+        	<activity
+            	android:label="@string/app_name"
+            	android:name="Page6" >
+        	</activity>
+        	<activity
+            	android:label="@string/app_name"
+            	android:name="Page7" >
+        	</activity>
+        	 <activity
+            	android:label="@string/app_name"
+            	android:name="Page8" >
+        	</activity>
+        	<activity
+            	android:label="@string/app_name"
+            	android:name="Page9" >
+        	</activity>
     </application>
 
 </manifest>

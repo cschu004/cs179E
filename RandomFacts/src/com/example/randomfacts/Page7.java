@@ -9,19 +9,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class Page4 extends Activity {
+public class Page7 extends Activity {
 	Button button;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.page4);
+		setContentView(R.layout.page7);
 	
 	}
 	
 	public void NEXT(View arg0) {
  
-			Intent intent = new Intent(this, Page5.class);
+			Intent intent = new Intent(this, Page8.class);
             this.startActivity(intent);   
  
 	}

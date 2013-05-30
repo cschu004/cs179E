@@ -16,27 +16,18 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		addListenerOnButton();
+		
 	}
-	public void addListenerOnButton() {
-		 
-		final Context context = this;
+
  
-		button = (Button) findViewById(R.id.button1);
+	public void NEXT(View arg0) {
  
-		button.setOnClickListener(new OnClickListener() {
- 
-			@Override
-			public void onClick(View arg0) {
- 
-			    Intent intent = new Intent(context, Page1.class);
-                            startActivity(intent);   
- 
-			}
- 
-		});
+			Intent intent = new Intent(this, Page1.class);
+            this.startActivity(intent);   
  
 	}
+ 
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
